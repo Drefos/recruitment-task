@@ -3,12 +3,13 @@ package me.borkowski.rest.controller;
 import me.borkowski.model.Employee;
 import me.borkowski.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,5 +39,16 @@ public class EmployeeRestController {
             employees.sort(Comparator.comparing(Employee::getEmail));
         }
         return employees;
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity saveEmployee(@RequestBody @Valid Employee employee, BindingResult bindingResult) {
+        if(!bindingResult.hasErrors()) {
+            employeeRepository.save(employee);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+        }
+
     }
 }
