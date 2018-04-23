@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Employee {
@@ -20,13 +21,16 @@ public class Employee {
     @NotEmpty
     @Email
     private String email;
+    @NotNull
+    private Position position;
 
     public Employee() {}
 
-    public Employee(@NotEmpty String firstName, @NotEmpty String lastName, @NotEmpty @Email String email) {
+    public Employee(@NotEmpty String firstName, @NotEmpty String lastName, @NotEmpty @Email String email, @NotNull Position position) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.position = position;
     }
 
     public Integer getId() {
@@ -59,5 +63,13 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }
