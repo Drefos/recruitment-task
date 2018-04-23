@@ -42,7 +42,7 @@ W celu dodania nowego użytkownika do listy należy odwołać się do adresu htt
   "position": "TESTER"
 }
 ```
-
+(Lista dostępnych stanowisk: [DIRECTOR, MANAGER, HR, DEV, TESTER])
 
 **`Żądanie PUT`**
 
