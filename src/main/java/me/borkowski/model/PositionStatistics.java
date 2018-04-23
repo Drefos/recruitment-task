@@ -5,8 +5,8 @@ public class PositionStatistics {
     private String position;
     private Long amount;
 
-    public PositionStatistics(String position, Long amount) {
-        this.position = position;
+    public PositionStatistics(Position position, Long amount) {
+        this.position = position.positionName;
         this.amount = amount;
     }
 
